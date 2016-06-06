@@ -51,6 +51,11 @@ output:
 {%   if item.name == "elasticsearch" %}
     hosts: ["{{ item.host }}"]
     worker: {{ item.workers }}
+{%   elif item.name == "logstash" %}
+    hosts:
+{%  for host in item.hosts %}
+      - "{{ host }}"
+{%  endfor %}
 {%   endif %}
 {% endfor %}
 
